@@ -1,0 +1,30 @@
+.main {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  border-radius: 99999999px;
+  border: 1px solid #282828;
+  padding-left: 6px;
+  padding-right: 10px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #282828;
+  user-select: none;
+}
+
+.deleteButton {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-right: 5px;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.deleteButton svg {
+  width: 18px;
+  height: 18px;
+}

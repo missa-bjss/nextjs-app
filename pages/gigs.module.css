@@ -1,0 +1,33 @@
+.mobileFilterSection {
+  display: none;
+}
+
+.myGigsSection {
+  margin-bottom: 30px;
+}
+
+.availableGigsSection {
+  margin-bottom: 30px;
+}
+
+.filter {
+  margin-right: 5px;
+  padding: 5px;
+}
+
+@media screen and (max-width: 767px) {
+  .mobileFilterSection {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+
+  .mobileFilterSection > * {
+    flex: 1;
+  }
+
+  .myGigsSection {
+    margin-bottom: 20px;
+  }
+}

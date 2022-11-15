@@ -1,0 +1,57 @@
+.main {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 46px;
+    padding-top: 32px;
+    padding-bottom: 10px;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 175px;
+    height: 33px;
+    background: url('~/public/images/nav-logo.svg');
+    background-size: 175px 33px;
+    background-repeat: no-repeat;
+    background-origin: center center;
+  }
+  
+  .avatar {
+    width: 46px;
+    height: 46px;
+  }
+  
+  .field {
+    width: 200px;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .field {
+      display: none;
+    }
+  
+    .avatar {
+      margin-left: auto;
+    }
+  }
+  
+  @media screen and (min-width: 767px) {
+    .main {
+      justify-content: space-between;
+    }
+  
+    .logo {
+      position: absolute;
+      margin-top: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      left: calc(50% - 87.5px);
+    }
+  }
+  

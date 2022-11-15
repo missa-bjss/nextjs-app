@@ -1,0 +1,33 @@
+.button {
+  outline: none;
+  background: none;
+  appearance: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: white;
+  background: #b8b8b8;
+  border-radius: 999999999px;
+  transition: opacity 0.2s ease;
+}
+
+.button.green {
+  background: #5a9566;
+}
+
+.button.red {
+  background: #b14242;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:disabled,
+.button:disabled:hover {
+  opacity: 0.5;
+}

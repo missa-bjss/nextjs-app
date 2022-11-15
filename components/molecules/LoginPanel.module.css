@@ -1,0 +1,27 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+}
+
+.group > label {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .group {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .group {
+    margin-top: 40px;
+  }
+}
