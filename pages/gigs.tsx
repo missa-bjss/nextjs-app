@@ -53,15 +53,15 @@ const Gigs: NextPage = (props:any) => {
   useEffect( () => {
     if ( router.isReady ){
       UIStore.update( s => {s.emailAddress = router.query.email as string})
-      // gigService.loadMyGigs( router.query.email as string ) // Used for Client-Side Rendering
-      gigService.loadMyGigs_stateUpdate(props.myGigs) // Used for Server-Side Rendering
+      gigService.loadMyGigs( router.query.email as string ) // Used for Client-Side Rendering
+      // gigService.loadMyGigs_stateUpdate(props.myGigs) // Used for Server-Side Rendering
     }
   },[router.isReady]);
 
   // load available gigs
   useEffect( () => {
-    gigService.loadAvailableGigs_stateUpdate(props.availableGigs) // Used for Server-Side Rendering
-    // gigService.loadAvailableGigs(); // Used for Client-Side Rendering
+    // gigService.loadAvailableGigs_stateUpdate(props.availableGigs) // Used for Server-Side Rendering
+    gigService.loadAvailableGigs(); // Used for Client-Side Rendering
   },[]);
   
   const availableIndustries = buildIndustryList(appState.selectedIndustries)
@@ -96,13 +96,13 @@ const Gigs: NextPage = (props:any) => {
 export default Gigs;
 
 
-export async function getServerSideProps(context: NextPageContext) {
-  const availableGigs = await gigService.loadAvailableGigs_get().then((res)=>{return res.data})
-  const myGigs = await gigService.loadMyGigs_get( context.query.email as string ).then((res)=>{return res.data})
-  return {
-    props: { // will be passed to the page component as props
-      availableGigs: JSON.parse(JSON.stringify(availableGigs)),
-      myGigs: JSON.parse(JSON.stringify(myGigs))
-    }
-  }
-}
+// export async function getServerSideProps(context: NextPageContext) {
+//   const availableGigs = await gigService.loadAvailableGigs_get().then((res)=>{return res.data})
+//   const myGigs = await gigService.loadMyGigs_get( context.query.email as string ).then((res)=>{return res.data})
+//   return {
+//     props: { // will be passed to the page component as props
+//       availableGigs: JSON.parse(JSON.stringify(availableGigs)),
+//       myGigs: JSON.parse(JSON.stringify(myGigs))
+//     }
+//   }
+// }
