@@ -1,5 +1,6 @@
 import React from "react";
 import { UIStore } from "../../store/appState";
+import { APIDropdown } from "../molecules/ApiDropdown";
 import Nav from "../molecules/Nav";
 import TextField from "../quarks/TextField";
 
@@ -19,6 +20,7 @@ const Header = () => {
             value={searchLocation || ""}
             onChange={(e) => setSearchLocation(e)}
         />
+        <APIDropdown />
       </Nav>
   );
 };

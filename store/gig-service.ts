@@ -7,17 +7,25 @@ class GigService {
      * Loads gigs for a user
      * @param email 
      */
-     loadMyGigs_get( email: string ){
-        return axios.get(`${apiUrl}/gigs/my-gigs/${email}`)
+     loadMyGigs_get( email: string, appState:any ){
+        return axios.get(`${apiUrl}/gigs/my-gigs/${email}`, {
+          headers: {
+            'bjss-db': appState.apiDropdown
+          }
+        })
     }
-    loadAvailableGigs_get(){
-      return axios.get(`${apiUrl}/gigs/unclaimed`)
+    loadAvailableGigs_get(appState:any){
+      return axios.get(`${apiUrl}/gigs/unclaimed`, {
+        headers: {
+          'bjss-db': appState.apiDropdown
+        }
+      })
     }
-    loadMyGigs( email: string ){
+    loadMyGigs( email: string, appState:any ){
         this.setLoadingMyGigs( true )
         this.setFailedLoadingMyGig( false)
       
-        this.loadMyGigs_get(email).then((res) => {
+        this.loadMyGigs_get(email, appState).then((res) => {
           UIStore.update( s => {
               s.myGigs = res.data;
           })
@@ -41,11 +49,11 @@ class GigService {
     /**
      * Loads all unclaimed gigs
      */
-    loadAvailableGigs(){
+    loadAvailableGigs(appState:any){
       this.setLoadingAvailableGigs(true);
       this.setFailedLoadingAvailableGigs(false)
 
-      this.loadAvailableGigs_get().then((res) => {
+      this.loadAvailableGigs_get(appState).then((res) => {
         UIStore.update( s => {
             s.availableGigs = res.data;
         })

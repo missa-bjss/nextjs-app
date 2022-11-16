@@ -53,7 +53,7 @@ const Gigs: NextPage = (props:any) => {
   useEffect( () => {
     if ( router.isReady ){
       UIStore.update( s => {s.emailAddress = router.query.email as string})
-      gigService.loadMyGigs( router.query.email as string ) // Used for Client-Side Rendering
+      gigService.loadMyGigs( router.query.email as string, appState ) // Used for Client-Side Rendering
       // gigService.loadMyGigs_stateUpdate(props.myGigs) // Used for Server-Side Rendering
     }
   },[router.isReady]);
@@ -61,7 +61,7 @@ const Gigs: NextPage = (props:any) => {
   // load available gigs
   useEffect( () => {
     // gigService.loadAvailableGigs_stateUpdate(props.availableGigs) // Used for Server-Side Rendering
-    gigService.loadAvailableGigs(); // Used for Client-Side Rendering
+    gigService.loadAvailableGigs(appState); // Used for Client-Side Rendering
   },[]);
   
   const availableIndustries = buildIndustryList(appState.selectedIndustries)
