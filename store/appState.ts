@@ -29,8 +29,8 @@ export class AppState {
     failedToUpdateGig: boolean = false;
     myGigs: Gig[] = []
     availableGigs: Gig[] = []
-    dropdown_db: string = ""
-    dropdown_api: string = ""
+    dropdown_db: string = "amethyst"
+    dropdown_api: string = "hydrogen"
 }
 
 

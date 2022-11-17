@@ -54,8 +54,8 @@ const Gigs: NextPage = (props:any) => {
     if ( router.isReady ){
       UIStore.update( s => {s.emailAddress = router.query.email as string})
       console.log("******\t",router.query)
-      const dropdown_db = appState.dropdown_db.length > 1? appState.dropdown_db : router.query.db as string
-      const dropdown_api = appState.dropdown_api.length > 1? appState.dropdown_api : router.query.api as string
+      const dropdown_db = router.query.db as string? router.query.db as string : appState.dropdown_db 
+      const dropdown_api = router.query.api as string? router.query.api as string : appState.dropdown_api
       gigService.loadMyGigs( router.query.email as string, dropdown_db, dropdown_api ) // Used for Client-Side Rendering
       // gigService.loadMyGigs_stateUpdate(props.myGigs) // Used for Server-Side Rendering
     }
@@ -64,8 +64,8 @@ const Gigs: NextPage = (props:any) => {
   // load available gigs
   useEffect( () => {
     // gigService.loadAvailableGigs_stateUpdate(props.availableGigs) // Used for Server-Side Rendering
-    const dropdown_db = appState.dropdown_db.length > 1? appState.dropdown_db : router.query.db as string
-    const dropdown_api = appState.dropdown_api.length > 1? appState.dropdown_api : router.query.api as string
+    const dropdown_db = router.query.db as string? router.query.db as string : appState.dropdown_db 
+    const dropdown_api = router.query.api as string? router.query.api as string : appState.dropdown_api
     gigService.loadAvailableGigs(dropdown_db, dropdown_api); // Used for Client-Side Rendering
   },[]);
   
