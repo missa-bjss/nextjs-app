@@ -53,7 +53,10 @@ const Gigs: NextPage = (props:any) => {
   useEffect( () => {
     if ( router.isReady ){
       UIStore.update( s => {s.emailAddress = router.query.email as string})
-      gigService.loadMyGigs( router.query.email as string, appState ) // Used for Client-Side Rendering
+      console.log("******\t",router.query)
+      const dropdown_db = appState.dropdown_db.length > 1? appState.dropdown_db : router.query.db as string
+      const dropdown_api = appState.dropdown_api.length > 1? appState.dropdown_api : router.query.api as string
+      gigService.loadMyGigs( router.query.email as string, dropdown_db, dropdown_api ) // Used for Client-Side Rendering
       // gigService.loadMyGigs_stateUpdate(props.myGigs) // Used for Server-Side Rendering
     }
   },[router.isReady]);
@@ -61,7 +64,9 @@ const Gigs: NextPage = (props:any) => {
   // load available gigs
   useEffect( () => {
     // gigService.loadAvailableGigs_stateUpdate(props.availableGigs) // Used for Server-Side Rendering
-    gigService.loadAvailableGigs(appState); // Used for Client-Side Rendering
+    const dropdown_db = appState.dropdown_db.length > 1? appState.dropdown_db : router.query.db as string
+    const dropdown_api = appState.dropdown_api.length > 1? appState.dropdown_api : router.query.api as string
+    gigService.loadAvailableGigs(dropdown_db, dropdown_api); // Used for Client-Side Rendering
   },[]);
   
   const availableIndustries = buildIndustryList(appState.selectedIndustries)
@@ -77,7 +82,7 @@ const Gigs: NextPage = (props:any) => {
         gigs={appState.myGigs}
         ownEmailAddress={appState.emailAddress}
         disabled={appState.failedLoadingMyGigs || !appState.emailAddress}
-        onActionClicked={(gig) => gigService.unassignGig(gig, appState.emailAddress)}
+        onActionClicked={(gig) => gigService.unassignGig(gig, appState.emailAddress, appState.dropdown_db, appState.dropdown_db)}
       />
       <GigList
         className={classNames.availableGigsSection}
@@ -86,7 +91,7 @@ const Gigs: NextPage = (props:any) => {
         gigs={appState.availableGigs}
         ownEmailAddress={appState.emailAddress}
         disabled={appState.failedLoadingMyGigs || !appState.emailAddress}
-        onActionClicked={(gig) => gigService.assignGig(gig, appState.emailAddress)}
+        onActionClicked={(gig) => gigService.assignGig(gig, appState.emailAddress, appState.dropdown_db, appState.dropdown_api)}
       >
         <GigsFilter/>
       </GigList>

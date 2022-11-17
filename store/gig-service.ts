@@ -7,25 +7,27 @@ class GigService {
      * Loads gigs for a user
      * @param email 
      */
-     loadMyGigs_get( email: string, appState:any ){
+     loadMyGigs_get( email: string, dropdown_db:string, dropdown_api:string ){
         return axios.get(`${apiUrl}/gigs/my-gigs/${email}`, {
           headers: {
-            'bjss-db': appState.apiDropdown
+            'bjss-db': dropdown_db,
+            'bjss-api':dropdown_api
           }
         })
     }
-    loadAvailableGigs_get(appState:any){
+    loadAvailableGigs_get(dropdown_db:string, dropdown_api:string){
       return axios.get(`${apiUrl}/gigs/unclaimed`, {
         headers: {
-          'bjss-db': appState.apiDropdown
+          'bjss-db': dropdown_db,
+          'bjss-api': dropdown_api
         }
       })
     }
-    loadMyGigs( email: string, appState:any ){
+    loadMyGigs( email: string, dropdown_db:string, dropdown_api:string ){
         this.setLoadingMyGigs( true )
         this.setFailedLoadingMyGig( false)
       
-        this.loadMyGigs_get(email, appState).then((res) => {
+        this.loadMyGigs_get(email, dropdown_db, dropdown_api).then((res) => {
           UIStore.update( s => {
               s.myGigs = res.data;
           })
@@ -49,11 +51,11 @@ class GigService {
     /**
      * Loads all unclaimed gigs
      */
-    loadAvailableGigs(appState:any){
+    loadAvailableGigs(dropdown_db:string, dropdown_api:string ){
       this.setLoadingAvailableGigs(true);
       this.setFailedLoadingAvailableGigs(false)
 
-      this.loadAvailableGigs_get(appState).then((res) => {
+      this.loadAvailableGigs_get(dropdown_db, dropdown_api).then((res) => {
         UIStore.update( s => {
             s.availableGigs = res.data;
         })
@@ -110,7 +112,7 @@ class GigService {
    * @param gig the gig to be assigned
    * @param email user's email
    */
-  assignGig(gig: Gig, email: string) {
+  assignGig(gig: Gig, email: string, dropdown_db:string, dropdown_api:string) {
     if (!gig || !email) return
 
     this.setUpdatingGig(true)
@@ -119,8 +121,8 @@ class GigService {
     })
     .then( res =>{
       this.setFailedToUpdateGig(false)
-      this.loadMyGigs( email);
-      this.loadAvailableGigs();
+      this.loadMyGigs( email, dropdown_db, dropdown_api);
+      this.loadAvailableGigs(dropdown_db, dropdown_api);
     })
     .catch( (error)=>{
       this.setFailedToUpdateGig(true)
@@ -134,7 +136,7 @@ class GigService {
    * Unassign a gig to a user
    * @param gig to be unassigned
    */
-  unassignGig(gig: Gig, email: string) {
+  unassignGig(gig: Gig, email: string, dropdown_db:string, dropdown_api:string) {
     if (!gig || !email) return
 
     this.setUpdatingGig(true);
@@ -142,8 +144,8 @@ class GigService {
     axios.post( `${apiUrl}/gigs/${gig.id}/cancel`, { emailAddress: email} )
     .then( res =>{
       this.setFailedToUpdateGig(false)
-      this.loadMyGigs(email)
-      this.loadAvailableGigs();
+      this.loadMyGigs(email, dropdown_db, dropdown_api)
+      this.loadAvailableGigs(dropdown_db, dropdown_api);
     })
     .catch( error=>{
       this.setFailedToUpdateGig(true)

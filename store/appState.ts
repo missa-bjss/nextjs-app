@@ -15,9 +15,6 @@ export interface Gig {
     endTimestamp: string;
     id: number;
 }
-export interface APIDropdown{
-    apiSelection: "amethyst" | "ruby" | "diamond" | "pearl" | "sapphire" | "garnet"
-}
 export class AppState {
     emailAddress: string = ""
     searchLocation: string = ""
@@ -32,7 +29,8 @@ export class AppState {
     failedToUpdateGig: boolean = false;
     myGigs: Gig[] = []
     availableGigs: Gig[] = []
-    apiDropdown: APIDropdown["apiSelection"] = "amethyst"
+    dropdown_db: string = ""
+    dropdown_api: string = ""
 }
 
 

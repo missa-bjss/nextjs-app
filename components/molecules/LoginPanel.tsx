@@ -8,6 +8,8 @@ import { UIStore } from "../../store/appState";
 
 export const LoginPanel = () => {
   const emailAddress = UIStore.useState((state) => state.emailAddress);
+  const dropdown_api = UIStore.useState((state) => state.dropdown_api);
+  const dropdown_db = UIStore.useState((state) => state.dropdown_db);
   const router = useRouter()
   
 
@@ -20,7 +22,7 @@ export const LoginPanel = () => {
 
   function navigateToGigs( ev: any ){
     if ( ev.key == "Enter" ){
-      router.push( "/gigs?email=" + encodeURIComponent(emailAddress));
+      router.push( "/gigs?email=" + encodeURIComponent(emailAddress) + "&api=" + encodeURIComponent(dropdown_api) + "&db=" + encodeURIComponent(dropdown_db));
     }
   }
 
